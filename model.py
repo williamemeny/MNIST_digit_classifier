@@ -90,6 +90,7 @@ def train_one_epoch(epoch: int):
     avg_loss = total_loss / total_examples               # mean loss over all samples
     acc = total_correct / total_examples                 # training accuracy
     print(f"Epoch {epoch}: train loss {avg_loss:.4f}, acc {acc:.4f}")
+    return avg_loss, acc  # Return the actual values
 
 # ----- 6) Evaluation -----
 @torch.no_grad()                        # disable gradient tracking for speed/memory
@@ -107,9 +108,31 @@ def evaluate():
 
     acc = total_correct / total_examples                # test accuracy (generalization)
     print(f"Test accuracy: {acc:.4f}")
+    return acc  # Return the actual accuracy
 
 # ----- 7) Run -----
 if __name__== '__main__':
+    final_train_loss = 0.0
+    final_test_accuracy = 0.0
+    
     for epoch in range(1, EPOCHS + 1):      # iterate epochs: 1..EPOCHS inclusive
-        train_one_epoch(epoch)               # train for one pass over training data
-        evaluate()                           # evaluate on held-out test set
+        train_loss, train_acc = train_one_epoch(epoch)  # train for one pass over training data
+        test_acc = evaluate()                           # evaluate on held-out test set
+        
+        # Store the final epoch values
+        if epoch == EPOCHS:
+            final_train_loss = train_loss
+            final_test_accuracy = test_acc
+    
+    # Save the trained model with tracked values
+    print("\nSaving model...")
+    torch.save({
+        'model_state_dict': model.state_dict(),
+        'optimizer_state_dict': optimizer.state_dict(),
+        'epoch': EPOCHS,
+        'train_loss': final_train_loss,        
+        'test_accuracy': final_test_accuracy,  
+    }, 'mnist_classifier.pth')
+    print("Model saved as 'mnist_classifier.pth'")
+    
+
