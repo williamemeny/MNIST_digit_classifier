@@ -12,11 +12,15 @@ class MLP(nn.Module):                    # Create a class that inherits from PyT
         self.fc1 = nn.Linear(28*28, 512) # First fully-connected layer: 784 input features -> 512 output features
         self.fc2 = nn.Linear(512, 256)   # Second fully-connected layer: 512 input features -> 256 output features
         self.fc3 = nn.Linear(256, 10)    # Third fully-connected layer: 256 input features -> 10 output features (digits 0-9)
+        self.dropout1 = nn.Dropout(0.3)   # Add dropout layer after first layer (30% dropout)
+        self.dropout2 = nn.Dropout(0.2)   # Add dropout layer after second layer (20% dropout)
 
     def forward(self, x):                 # Define how data flows through the network (forward pass)
         x = x.view(x.size(0), -1)        # Reshape input from [batch, 1, 28, 28] to [batch, 784] (flatten)
         x = F.relu(self.fc1(x))          # Pass through first layer, then apply ReLU activation function
+        x = self.dropout1(x)              # Apply 30% dropout after first layer
         x = F.relu(self.fc2(x))          # Pass through second layer, then apply ReLU activation function
+        x = self.dropout2(x)              # Apply 20% dropout after second layer
         logits = self.fc3(x)             # Pass through final layer to get raw output scores (logits)
         return logits                     # Return the logits (will be converted to probabilities later)
 

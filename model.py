@@ -41,7 +41,7 @@ test_loader  = DataLoader(                # mini-batch iterator over test_ds
 
 # ----- 3) Model: MLP -----
 # We flatten each 28x28 image -> vector of length 784, then pass through:
-# Linear(784->512) -> ReLU -> Linear(512->256) -> ReLU -> Linear(256->10)
+# Linear(784->512) -> ReLU -> Dropout -> Linear(512->256) -> ReLU -> Dropout -> Linear(256->10)
 # Output are logits for 10 classes (digits 0..9)
 class MLP(nn.Module):
     def __init__(self):
@@ -49,13 +49,18 @@ class MLP(nn.Module):
         self.fc1 = nn.Linear(28*28, 512)  # first fully-connected layer
         self.fc2 = nn.Linear(512, 256)    # second fully-connected layer
         self.fc3 = nn.Linear(256, 10)     # final layer -> 10 class logits
+        self.dropout1 = nn.Dropout(0.3)   # Higher dropout for first layer (more parameters)
+        self.dropout2 = nn.Dropout(0.2)   # Lower dropout for second layer
+        # No dropout after final layer (output layer)
 
     def forward(self, x):
         # x arrives as a batch of images: shape [B, 1, 28, 28]
         x = x.view(x.size(0), -1)         # flatten to [B, 784]
         x = F.relu(self.fc1(x))           # [B, 512], nonlinearity adds capacity
-        x = F.relu(self.fc2(x))           # [B, 256]
-        logits = self.fc3(x)              # [B, 10], raw scores per class
+        x = self.dropout1(x)               # 30% dropout after first layer
+        x = F.relu(self.fc2(x))
+        x = self.dropout2(x)               # 20% dropout after second layer
+        logits = self.fc3(x)              # No dropout before output
         return logits                     # leave as logits; CE loss applies softmax internally
 
 model = MLP().to(DEVICE)                  # move parameters to GPU/CPU
