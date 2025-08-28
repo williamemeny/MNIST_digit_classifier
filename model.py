@@ -11,8 +11,8 @@
 # - Advanced analysis tools for model evaluation
 # - Best practices in PyTorch development and code organization
 #
-# Author: [Your Name]
-# GitHub: [Your GitHub]
+# Author: William Emeny
+# GitHub: https://github.com/williamemeny
 # License: MIT
 # =============================================================================
 
@@ -583,4 +583,7 @@ if __name__ == '__main__':
     print("1. Run 'python view_misidentified.py' to analyze misclassifications")
     print("2. Use the saved model for inference on new images")
     print("3. Experiment with different hyperparameters or architectures")
+    print("\n📞 Contact: williamgeorgeemeny@gmail.com")
+    print("🐦 Twitter: https://x.com/Maths_Master")
+    print("💼 GitHub: https://github.com/williamemeny")
     print("="*80)

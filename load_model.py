@@ -12,8 +12,8 @@
 # - Professional error handling and validation
 # - Ready-to-use prediction functions
 #
-# Author: [Your Name]
-# GitHub: [Your GitHub]
+# Author: William Emeny
+# GitHub: https://github.com/williamemeny
 # License: MIT
 # =============================================================================
 
@@ -455,3 +455,6 @@ if __name__ == '__main__':
     print("Thank you for using the MNIST Model Loading Tool!")
     print("Star this repository if you found it helpful!")
     print("Connect with me for collaboration opportunities!")
+    print("\n📞 Contact: williamgeorgeemeny@gmail.com")
+    print("🐦 Twitter: https://x.com/Maths_Master")
+    print("💼 GitHub: https://github.com/williamemeny")

@@ -1,0 +1,23 @@
+# =============================================================================
+# MNIST Test Image Prediction Tool - Dependencies
+# =============================================================================
+# 
+# This file lists all the Python packages required to run the
+# MNIST test image prediction web interface.
+# =============================================================================
+
+# Core web framework
+Flask>=2.3.0
+
+# Deep learning and tensor operations
+torch>=1.13.0
+torchvision>=0.14.0
+
+# Scientific computing and image processing
+numpy>=1.21.0
+Pillow>=9.0.0
+matplotlib>=3.5.0
+
+# Optional: For better performance on Windows
+# torch-directml>=1.13.0  # Uncomment if using DirectML backend
+

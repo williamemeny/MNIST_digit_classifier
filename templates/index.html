@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MNIST Test Image Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🔢 MNIST Test Image Predictor</h1>
+            <p class="subtitle">Test your trained model with random MNIST test images</p>
+        </header>
+
+        <!-- Top Section: Model Status and How to Use -->
+        <section class="top-section">
+            <!-- Model Status Card -->
+            <div class="card model-status-card" id="modelStatusCard">
+                <div class="card-header">
+                    <h3>📱 Model Connection</h3>
+                </div>
+                <div class="card-content">
+                    <div class="status-indicator" id="statusIndicator">
+                        <div class="spinner"></div>
+                        <span>Checking model status...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Info Card -->
+            <div class="card model-info-card" id="modelInfoCard" style="display: none;">
+                <div class="card-header">
+                    <h3>📊 Model Information</h3>
+                </div>
+                <div class="card-content">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="label">Architecture:</span>
+                            <span class="value" id="modelArchitecture">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Parameters:</span>
+                            <span class="value" id="modelParameters">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Test Accuracy:</span>
+                            <span class="value" id="testAccuracy">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Best Accuracy:</span>
+                            <span class="value" id="bestAccuracy">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Device:</span>
+                            <span class="value" id="modelDevice">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructions Card -->
+            <div class="card instructions-card">
+                <div class="card-header">
+                    <h3>📖 How to Use</h3>
+                </div>
+                <div class="card-content">
+                    <ol class="instructions-list">
+                        <li>Wait for the model to load and test images to appear</li>
+                        <li>Click on any image in the 5×5 grid to select it</li>
+                        <li>Click the "Predict Digit" button to get results</li>
+                        <li>Use "Reset Grid" to get new random test images</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Side: Image Grid -->
+            <section class="image-grid-section">
+                <div class="section-header">
+                    <h2>📊 Test Images Grid</h2>
+                    <p>Click on any image to select it for prediction</p>
+                </div>
+
+                <div class="image-grid" id="imageGrid">
+                    <!-- Images will be loaded here dynamically -->
+                    <div class="loading-placeholder">
+                        <div class="spinner"></div>
+                        <p>Loading test images...</p>
+                    </div>
+                </div>
+
+                <div class="grid-controls">
+                    <button class="btn btn-secondary" id="resetBtn" disabled>
+                        🔄 Reset Grid
+                    </button>
+                </div>
+            </section>
+
+            <!-- Middle Side: Selected Image -->
+            <section class="selected-image-section">
+                <div class="section-header">
+                    <h2>🎯 Selected Image</h2>
+                    <p>View and predict the selected digit</p>
+                </div>
+
+                <!-- Selection Status Card -->
+                <div class="card selection-card" id="selectionCard" style="display: none;">
+                    <div class="card-content">
+                        <div class="selected-image-display">
+                            <img id="selectedImage" src="" alt="Selected image">
+                            <div class="image-info">
+                                <p><strong>Actual Digit:</strong> <span id="actualDigit">-</span></p>
+                                <p><strong>Grid Position:</strong> <span id="gridPosition">-</span></p>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-full" id="predictBtn">
+                            🚀 Predict Digit
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Side: Prediction Results -->
+            <section class="prediction-section">
+                <div class="section-header">
+                    <h2>🎯 Prediction Results</h2>
+                    <p>Model predictions and confidence scores</p>
+                </div>
+
+                <!-- Prediction Results Card -->
+                <div class="card results-card" id="resultsCard" style="display: none;">
+                    <div class="card-content">
+                        <div class="prediction-result" id="predictionResult">
+                            <!-- Results will be displayed here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 MNIST Digit Classifier Project</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
+

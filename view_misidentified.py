@@ -11,8 +11,8 @@
 # - Professional visualization using PIL for perfect spacing
 # - Comprehensive error analysis and reporting
 #
-# Author: [Your Name]
-# GitHub: [Your GitHub]
+# Author: William Emeny
+# GitHub: https://github.com/williamemeny
 # License: MIT
 # =============================================================================
 
@@ -466,3 +466,6 @@ if __name__ == "__main__":
     
     print("\nThank you for using the MNIST Misclassification Analysis Tool!")
     print("Star this repository if you found it helpful!")
+    print("\n📞 Contact: williamgeorgeemeny@gmail.com")
+    print("🐦 Twitter: https://x.com/Maths_Master")
+    print("💼 GitHub: https://github.com/williamemeny")
